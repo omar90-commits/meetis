@@ -1,0 +1,43 @@
+{{>head}}
+
+	<main class="asistentes contenedor">
+	    <h1>{{nombrePagina}}</h1>
+	    <div class="informacion-usuario">
+	        <div class="imagen">
+	            {{#if usuario.imagen}}
+	                <img src="/uploads/perfiles/{{usuario.imagen}}">
+				{{/if}}	
+	        </div> 
+
+	        <div class="texto">
+	        	{{{usuario.descripcion}}}
+	        </div>
+	    </div><!--info-usuario-->
+
+	    <div class="grupos-usuario">
+	        {{#if grupos}}
+	            <h2>Grupos de: {{usuario.nombre}}</h2>
+	            <ul class="lista-grupos">
+	               {{#each grupos}}
+	                    <li>
+	                        <div class="imagen">
+	                            {{#if imagen}}
+	                                <img src="/uploads/grupos/{{imagen}}">
+	                            
+	                            	{{else}}
+	                                	<img src="/img/logo.png">
+	                            {{/if}}
+	                        </div>
+	                        <div class="texto">
+	                            <a href="/grupos/{{_id}}">
+	                                <h3>{{nombre}}</h3>
+	                            </a>
+	                        </div>
+	                    </li>
+	                {{/each}}
+	            </ul>
+	        {{/if}}
+	    </div>
+	</main>
+
+{{>footer}}

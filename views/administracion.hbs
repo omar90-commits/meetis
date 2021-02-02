@@ -1,0 +1,108 @@
+{{>head}}
+
+	<main class="contenedor panel-administracion">
+		<h1>{{nombrePagina}}</h1>
+
+		<div class="contenedor-botones">
+			<a href="/nuevo-grupo" class="btn btn-amarillo">Nuevo Grupo</a>
+			<a href="/nuevo-meeti" class="btn btn-azul">Nuevo Meeti</a>
+			<a href="/editar-perfil" class="btn btn-rosa">Editar Perfil</a>
+			<a href="/cambiar-password" class="btn btn-verde">Cambiar Password</a>
+			<a href="/imagen-perfil" class="btn btn-amarillo">Imagen Perfil</a>
+		</div>
+
+		<div class="section-main">
+			<h2>PROXIMOS MEETI'S</h2>
+
+			{{#if meetiProximos.length}}
+				<ul>
+					{{#each meetiProximos}}
+						<li>
+							<div class="informacion-admin">
+								<p class="flecha">
+									{{#fechas fecha}}
+									{{/fechas}}
+									{{hora}} Horas
+								</p>
+
+								<h3>{{titulo}}</h3>
+								<small>{{interesados.length}} Interesados</small>
+							</div>
+
+							<div class="acciones contenedor-botones">
+								<a href="/editar-meeti/{{_id}}" class="btn btn-verde">Editar</a>
+								<a href="/aistentes-meeti/{{_id}}" class="btn btn-azul2">Asistentes</a>
+								<a href="/eliminar-meeti/{{_id}}" class="btn btn-rojo">Eliminar</a>
+							</div>	
+						</li>
+					{{/each}}
+				</ul>
+
+				{{else}}
+					<p>Aun no tienes meetis creados.</p>
+			{{/if}}
+		</div>
+
+		<div class="section-main">
+			<h2>MEETI'S ANTERIORES</h2>
+
+			{{#if meetiAnteriores.length}}
+				<ul>
+					{{#each meetiAnteriores}}
+						<li>
+							<div class="informacion-admin">
+								<p class="flecha">
+									{{#fechas fecha}}
+									{{/fechas}}
+									{{hora}} Horas
+								</p>
+
+								<h3>{{titulo}}</h3>
+								<small>{{interesados.length}} Interesados</small>
+							</div>
+
+							<div class="acciones contenedor-botones">
+								<a href="/editar-meeti/{{_id}}" class="btn btn-verde">Editar</a>
+								<a href="/aistentes-meeti/{{_id}}" class="btn btn-azul2">Asistentes</a>
+								<a href="/eliminar-meeti/{{_id}}" class="btn btn-rojo">Eliminar</a>
+							</div>	
+						</li>
+					{{/each}}
+				</ul>
+
+				{{else}}
+					<p>Aun no tienes meetis creados.</p>
+			{{/if}}
+		</div>
+
+		<div class="seccion-admin">
+			<h2>Tus Grupos</h2>
+
+			<ul>
+				{{#if grupos}}
+					{{#each grupos}}
+						<li>
+							<div class="informacion-admin">
+								<p class="flecha">Lunes 22 de Mayo de 2019</p>
+
+								<h3>{{nombre}}</h3>
+								<small>23  Asistentes</small>
+							</div>
+
+							<div class="acciones contenedor-botones">
+								<a href="/editar-grupo/{{_id}}" class="btn btn-verde">Editar</a>
+								<a href="/imagenes-grupo/{{_id}}" class="btn btn-azul2">Imagen</a>
+								<a href="/eliminar-grupo/{{_id}}" class="btn btn-rojo">Eliminar</a>
+							</div>	
+						</li>
+					{{/each}}
+
+					{{else}}
+						<p class="text-light text-center">No tienes un grupo creado</p>
+				{{/if}}
+			</ul>
+		</div>
+
+	</main>
+
+{{>footer}}

@@ -1,0 +1,129 @@
+{{>head}}
+
+	<main class="encabezado-evento">
+		<div class="contenedor">
+			<div class="resumen-evento">
+				<h1>{{meeti.titulo}}</h1>
+
+				<div class="info-autor">
+					<div class="imagen">
+						<img src="/uploads/perfiles/{{usuarios.imagen}}" alt="{{usuarios.imagen}}">
+					</div>
+
+					<div class="informacion">
+						<p>Organizado por:</p>
+						<p class="autor">
+							<a href="/usuarios/{{usuarios._id}}">{{usuarios.nombre}}</a>
+							Creador de
+							<a href="/grupos/{{grupos._id}}">{{grupos.nombre}}</a>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="pregunta-asistencia">
+				{{#if noAutenticado}}
+					<p>Inicia sesion para confirmar tu asistencia</p>
+
+					{{else}}
+						<form action="/confirmar-asistencia/{{meeti.url}}" id="confirmar-asistencia">
+							<p>¿Asistiras?</p>
+							{{#if confirmar}}
+								<input type="submit" id="confirmar" class="btn btn-rojo" value="Cancelar">
+
+								{{else}}
+									<input type="submit" id="confirmar" class="btn btn-azul" value="Confirmar">
+							{{/if}}
+						</form>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+
+	<div class="contenido-evento">
+		<div class="contenedor">
+			<div class="informacion-evento">
+				<div class="descripcion">
+					<img src="/uploads/grupos/{{grupos.imagen}}">
+
+					<p>{{{meeti.descripcion}}}</p>
+				</div>
+
+				<div class="asistentes">
+					<div class="titulo">
+						<h3>{{meeti.interesados.length}}</h3>
+						<a href="/asistentes/{{meeti.url}}">Ver Todos</a>
+					</div>
+				</div>
+
+				<div class="comentarios">
+					<h2>Comentarios</h2>
+
+					{{#if comentarios}}
+						{{#each comentarios}}
+							<div class="comentario">
+								<div class="imagen">
+									{{#if usuario.imagen}}
+										<img src="/uploads/perfiles/{{usuario.imagen}}" alt="{{usuario.imagen}}">
+									{{/if}}
+								</div>
+
+								<div class="texto">
+									<p>{{comentario}}</p>
+									<p>Escrito por: <a href="/usuarios/{{usuario._id}}">{{usuario.nombre}}</a></p>
+
+									{{#isCurrent usuario._id ../userLogeado ../meeti.usuarios ../logeadoUser}}
+										<form action="/eliminar-comentario" method="POST" class="eliminar-comentario">
+											<input type="hidden" name="idComentario" value="{{../_id}}">
+											<input type="submit" value="Eliminar" class="btn btn-azul2">
+										</form>
+                    				{{/isCurrent}}
+								</div>
+							</div>
+						{{/each}}
+
+						{{else}}
+							<p>No hay comentarios aun</p>
+					{{/if}}
+
+					{{#if noAutenticado}}
+
+						<p>Inicia sesion para Agregar un Comentario</p>
+
+						{{else}}
+							<form action="/meeti/{{meeti._id}}" class="default-form comentarios" method="POST">
+								<legend>Agrega un comentario</legend>
+
+								<div class="campo">
+									<label>Comentario</label>
+									<textarea name="comentario"></textarea>
+								</div>
+
+								<div class="campo enviar">
+									<input type="submit" value="Enviar" class="btn btn-rosa">
+								</div>
+							</form>
+					{{/if}}
+				</div>
+			</div>
+
+			<aside class="informacion">
+				<div class="fecha">
+					{{#fechas meeti.fecha}}
+					{{/fechas}}
+					hora: {{meeti.hora}}
+				</div>
+
+				<div class="ubicacion">
+					<p>{{meeti.direccion}}, {{meeti.ciudad}}, {{meeti.estado}}, {{meeti.pais}}</p>
+				</div>
+
+				<input type="hidden" id="lat" value="{{lat}}">
+				<input type="hidden" id="lng" value="{{lng}}">
+				<div id="ubicacion-meeti"></div>
+			</aside>
+
+		</div>
+	</main>
+
+{{>footer}}

@@ -1,0 +1,27 @@
+{{>head}}
+	
+	<main class="contenedor asistentes">
+		<h1>{{nombrePagina}}</h1>
+
+		{{#if asistentes}}
+			<ul class="listado-asistentes">
+				{{#each asistentes}}
+					<li>
+						<div class="imagen">
+							{{#if imagen}}
+								<img src="/uploads/perfiles/{{imagen}}">
+							{{/if}}
+						</div>
+
+						<div class="texto">{{nombre}}</div>
+					</li>
+				{{/each}}
+			</ul>
+
+			{{else}}
+				<p class="no-asistentes">No hay asistentes</p>
+		{{/if}}
+
+	</main>
+
+{{>footer}}

@@ -1,0 +1,48 @@
+{{>head}}
+
+	<main class="contenedor">
+	    <h1>{{nombrePagina}}</h1>
+
+	    <div class="informacion-grupo">
+	        <div class="imagen">
+	            {{#if grupo.imagen}}
+	                <img src="/uploads/grupos/{{grupo.imagen}}">
+
+	                {{else}}
+	                	<img src="/img/logo.jpg">
+				{{/if}}	
+	        </div> 
+
+	        <div class="texto">
+	        	{{{grupo.descripcion}}}
+
+	        	{{#if grupo.url}}
+	        		<a target="_blank" class="url" href="{{grupo.url}}">Visita nuestro sitio web</a>
+	        	{{/if}}
+
+	        	{{#if meetis.length}}
+	        		<h2>Proximos meetis</h2>
+	        		
+	        		<ul class="lista-meetis">
+	        			{{#each meetis}}
+	        				<li>
+		        				<div class="texto">
+		        					<a href="/meeti/{{url}}">
+		        						<h3>{{titulo}}</h3>
+		        						
+		        						<p class="fecha">
+											{{#fechas fecha}}
+											{{/fechas}}
+											{{hora}} Horas
+										</p>
+		        					</a>
+		        				</div>
+	        				</li>
+	        			{{/each}}
+	        		</ul>
+	        	{{/if}}
+	        </div>
+	    </div>
+	</main>
+
+{{>footer}}
